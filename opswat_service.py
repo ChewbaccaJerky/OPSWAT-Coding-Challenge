@@ -1,5 +1,7 @@
 import requests
+
 API_KEY = "<API_KEY>"
+headers = {'apikey': API_KEY}
 test_hash = "E71A6D8760B37E45FA09D3E1E67E2CD3"
 
 class OpswatService:
@@ -12,7 +14,7 @@ class OpswatService:
             @params hash => hashed value of file
             @return Response result either success or failure
         """
-        headers = {'apikey': API_KEY}
+        
         url = "https://api.metadefender.com/v2/hash/" + hash
         result = requests.get(url, headers=headers)
         return result
@@ -32,7 +34,6 @@ class OpswatService:
             for chunk in f:
                 byteFile += chunk
 
-        headers = {'apikey': API_KEY}
         files = {'file': byteFile}
         
         url = "https://api.metadefender.com/v2/file"
@@ -48,7 +49,7 @@ class OpswatService:
             @params data_id => String to access scan details
             @return Response object of scan details
         """
-        headers = {'apikey': API_KEY}
+
         url = "https://api.metadefender.com/v2/file/" + data_id
         result = requests.get(url, headers=headers)
         return result
