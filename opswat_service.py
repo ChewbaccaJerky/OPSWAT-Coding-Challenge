@@ -1,5 +1,5 @@
 import requests
-API_KEY = "ba73d9dfb10ee957005455ba228a0c00"
+API_KEY = "<API_KEY>"
 test_hash = "E71A6D8760B37E45FA09D3E1E67E2CD3"
 
 class OpswatService:
