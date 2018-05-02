@@ -3,9 +3,15 @@ API_KEY = "<API_KEY>"
 test_hash = "E71A6D8760B37E45FA09D3E1E67E2CD3"
 
 class OpswatService:
-
+    """ OPSWAT SERVICE connects to OPSWAT API and does following methods """
+    
     @staticmethod
     def hash_lookup(hash):
+        """ 
+            Checks OPSWAT store to see if file has already been scanned 
+            @params hash => hashed value of file
+            @return Response result either success or failure
+        """
         headers = {'apikey': API_KEY}
         url = "https://api.metadefender.com/v2/hash/" + hash
         result = requests.get(url, headers=headers)
@@ -14,6 +20,12 @@ class OpswatService:
 
     @staticmethod
     def upload_file(path, filename):
+        """ 
+            Upload file to scan into OPSWAT API
+            @params path => String absolute path
+                    filename => String filename
+            @return Response object with data_id
+        """
         byteFile = ""
 
         with open(path, "rb", 4098) as f:
@@ -31,6 +43,11 @@ class OpswatService:
 
     @staticmethod
     def get_results_by_data_id(data_id):
+        """
+            After retrieving data_id you can get results from OPSWAT API
+            @params data_id => String to access scan details
+            @return Response object of scan details
+        """
         headers = {'apikey': API_KEY}
         url = "https://api.metadefender.com/v2/file/" + data_id
         result = requests.get(url, headers=headers)
@@ -38,7 +55,12 @@ class OpswatService:
 
     @staticmethod
     def print_result(res, filename):
-
+        """
+            Print results by specific format
+            @params res => Response result 
+                    filename => String filename
+            
+        """
         result = res.json()["scan_results"]
         details = result["scan_details"]
 

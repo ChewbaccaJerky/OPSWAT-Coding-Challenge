@@ -4,7 +4,15 @@ import sys
 from hash import Hash
 from opswat_service import OpswatService
 
+
+
 def scan_file(filename):
+    """
+        Scan File checks OPSWAT's api store to see if a scan has been done already.
+        If not create a new scan of file then store.
+        @params filename can be either filename relative to directory or a whole file path
+        @return nil but prints scanning result
+    """
     path = os.path.realpath(filename)
     # Step 1 Create Hash with MD5 algorithm
     hash = Hash.create(path)
@@ -30,6 +38,10 @@ def scan_file(filename):
         OpswatService.print_result(result, filename)
 
 def main():
+    """
+        Main logic of the application.
+        Checks arguments size, the file exists, catches exceptions if thrown from hash.py or opswat_service.py
+    """
     if len(sys.argv) < 2:
         print "Invalid number of arguments"
         return
